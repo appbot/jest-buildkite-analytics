@@ -1,0 +1,9 @@
+{
+  "name": "jest-buildkite-analytics",
+  "version": "1.0.0",
+  "description": "Create and send jest test results to buildkite analytics",
+  "main": "index.js",
+  "author": "Appbot",
+  "license": "MIT",
+  "private": false
+}
