@@ -31,7 +31,9 @@ const toStat = (test, path, start) => {
     // there's only ever one, but both ends use an array. so :shrug:
     for (let i = 0; i < test.failureDetails.length; i++) {
       const detail = {
-        message: clean(test.failureDetails[i]?.message),
+        message: clean(
+          test.failureDetails[i] && test.failureDetails[i].message
+        ),
         stack:
           clean(test.failureDetails[i].stack || test.failureMessages[i]) ||
           "Unknown error",
