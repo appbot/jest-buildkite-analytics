@@ -5,5 +5,9 @@
   "main": "index.js",
   "author": "Appbot",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/appbot/jest-buildkite-analytics.git"
+  },
   "private": false
 }
