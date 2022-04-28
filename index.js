@@ -99,7 +99,6 @@ const sendToBuildkite = results => {
         res.on("error", oneResolve);
       }
     );
-
     request.write(body);
     request.end();
   });
@@ -112,8 +111,10 @@ class CustomReporter {
     if (
       !process.env.BUILDKITE_BUILD_ID ||
       !process.env.BUILDKITE_JEST_ANALYTICS_TOKEN
-    )
+    ) {
+      console.log("Not sending to buildkite, missing required env vars");
       return;
+    }
     const allStats = results.testResults.flatMap(fileResult);
     return sendToBuildkite(allStats);
   }
