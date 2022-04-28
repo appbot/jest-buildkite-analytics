@@ -1,5 +1,5 @@
 {
-  "name": "jest-buildkite-analytics",
+  "name": "@appbot.co/jest-buildkite-analytics",
   "version": "1.0.0",
   "description": "Create and send jest test results to buildkite analytics",
   "main": "index.js",
