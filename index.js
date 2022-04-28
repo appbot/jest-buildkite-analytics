@@ -115,7 +115,11 @@ class CustomReporter {
       console.log("Not sending to buildkite, missing required env vars");
       return;
     }
-    const allStats = results.testResults.flatMap(fileResult);
+    const allStats = results.testResults.reduce((stats, result) => {
+      stats.push(...fileResult(result));
+      return stats;
+    }, []);
+
     return sendToBuildkite(allStats);
   }
 }
