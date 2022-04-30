@@ -8,25 +8,21 @@ This package collects data about your test suite's performance and reliability, 
 yarn add @appbot/jest-buildkite-analytics
 ```
 
-Configure your API key - in your `jest.config.js` or where ever you have your jest config
+Configure your API key:
 
-```javascript
-{
-  reporters: ["default", ["jest-buildkite-analytics", { token: "......" }]];
-}
+set the environment variable `BUILDKITE_JEST_ANALYTICS_TOKEN` to your token. If you're running jest from a script, you can set it with:
+
+```shell
+export BUILDKITE_JEST_ANALYTICS_TOKEN="yourTokenValueHere"
 ```
 
-We suggest you load your token from an environment variable, and store it outside of your codebase.
+We suggest loading the environment variable within your buildkite settings.
+
+Tell jest to use the reporter. Set `reporters` in your `jest.config.js` (or which ever type of config you're using):
 
 ```javascript
 {
-  reporters: [
-    "default",
-    [
-      "jest-buildkite-analytics",
-      { token: process.env.BUILDKITE_TEST_ANALYTICS_TOKEN },
-    ],
-  ];
+  reporters: ["default", "jest-buildkite-analytics"];
 }
 ```
 
@@ -39,7 +35,7 @@ $ git push
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at .
+Bug reports and pull requests are welcome on GitHub at https://github.com/appbot/jest-buildkite-analytics.
 
 ## License
 

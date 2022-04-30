@@ -13,5 +13,14 @@
   "bugs": {
     "url": "https://github.com/appbot/jest-buildkite-analytics/issues"
   },
-  "homepage": "https://github.com/appbot/jest-buildkite-analytics#readme"
+  "homepage": "https://github.com/appbot/jest-buildkite-analytics#readme",
+  "dependencies": {
+    "websocket": "^1.0.34"
+  },
+  "devDependencies": {
+    "jest-cli": "^28.0.2"
+  },
+  "scripts": {
+    "test": "jest --runInBand --testLocationInResults"
+  }
 }
