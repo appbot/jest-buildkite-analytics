@@ -1,6 +1,6 @@
 {
   "name": "@appbot.co/jest-buildkite-analytics",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Create and send jest test results to buildkite analytics",
   "main": "index.js",
   "author": "Appbot",
