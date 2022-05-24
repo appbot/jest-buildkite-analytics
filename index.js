@@ -96,7 +96,7 @@ const fileResult = result => {
 };
 
 const run_env = {
-  CI: "buildkite",
+  ci: "buildkite",
   key: process.env.BUILDKITE_BUILD_ID,
   number: process.env.BUILDKITE_BUILD_NUMBER,
   job_id: process.env.BUILDKITE_JOB_ID,
@@ -115,6 +115,7 @@ class CustomReporter {
       console.log("Not sending to buildkite, missing required env vars");
       return;
     }
+    this.canSend = true;
   }
 
   sendToBuildkite(results) {
@@ -155,7 +156,6 @@ class CustomReporter {
 
           response.on("end", async () => {
             const result = JSON.parse(responseData);
-            // {"id":"fd338fcc-e3c9-4d4a-b0cd-f59dfdd92b60","run_id":"9904edd5-751e-4283-baae-cda0282df0d7","cable":"wss://buildkite.com/_cable","channel":"{\"channel\":\"Analytics::UploadChannel\",\"id\":\"fd338fcc-e3c9-4d4a-b0cd-f59dfdd92b60\"}"}
 
             this.socketURL = result.cable;
             this.channel = result.channel;
@@ -184,7 +184,6 @@ class CustomReporter {
             );
           }
           if (statusCode != 200) {
-            console.log(statusCode);
             return done(
               new Error(
                 "jest-buildkite-analytics could not establish an initial connection with Buildkite. " +
@@ -230,7 +229,7 @@ class CustomReporter {
     }
     switch (message.type) {
       case "ping":
-        return console.log("🏓");
+        return;
       case "welcome":
         this.send("subscribe");
         return;
@@ -251,11 +250,8 @@ class CustomReporter {
         );
 
       default:
-        console.log(message.type);
         if (!message.message || !message.message.confirm)
           throw new Error(`Unknown message: ${message.type}`);
-
-        console.log("Messages confirmed:", message.message.confirm);
     }
   }
 
@@ -291,9 +287,13 @@ class CustomReporter {
   }
 
   onTestFileResult(_test, results) {
+    if (!this.canSend) return;
+
     return this.sendToBuildkite(fileResult(results));
   }
   async onRunStart() {
+    if (!this.canSend) return;
+
     await this.connect().catch(e =>
       console.log("Not sending to buildkite analytics", e)
     );
