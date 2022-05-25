@@ -1,4 +1,4 @@
 module.exports = {
   resetMocks: true,
-  reporters: ["default", "../index"],
+  reporters: ["default", "./index"],
 };
