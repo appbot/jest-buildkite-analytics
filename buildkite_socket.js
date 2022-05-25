@@ -26,7 +26,7 @@ module.exports = class BuildkiteSocket {
   }
 
   connect() {
-    const body = JSON.stringify({ format: "websocket", run_env });
+    const body = JSON.stringify({ format: "websocket", run_env: this.run_env });
 
     return new Promise((resolve, reject) => {
       let responded = false;
