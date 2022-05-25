@@ -1,0 +1,8 @@
+steps:
+  - label: ":jest: jest"
+    commands:
+      - "npm install yarn -g"
+      - "yarn test"
+    plugins:
+      docker#v3.8.0:
+      image: "node:14-alpine"
