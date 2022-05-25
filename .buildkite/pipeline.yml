@@ -1,9 +1,9 @@
 steps:
   - label: ":jest: jest"
     commands:
-      - "npm install yarn -g"
+      - "apk add  --no-cache --virtual .gyp python3 make g++"
+      - "yarn install"
       - "yarn test"
     plugins:
       - docker#v3.8.0:
-          config:
-            - docker-compose.yml
+          image: "node:14-alpine"
