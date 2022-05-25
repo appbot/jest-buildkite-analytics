@@ -1,7 +1,7 @@
 steps:
   - label: ":jest: jest"
     commands:
-      - "apk add  --no-cache --virtual .gyp python3 make g++"
+      - "apk add  --no-cache --virtual .gyp python3 make g++ >& /dev/null"
       - "yarn install"
       - "yarn test"
     plugins:

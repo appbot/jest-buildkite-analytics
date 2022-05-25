@@ -94,37 +94,24 @@ class CustomReporter {
       console.log("Not sending to buildkite, missing required env vars");
       return;
     }
-    this.canSend = true;
     this.socket = new BuildkiteSocket(run_env);
   }
 
   sendToBuildkite(results) {
-    return this.socket.message({ action: "record_results", results });
-  }
-
-  connect() {
-    return this.socket.connect();
-  }
-
-  connectToSocket() {
-    return this.socket.connectToSocket();
+    return this.socket?.message({ action: "record_results", results });
   }
 
   onTestFileResult(_test, results) {
-    if (!this.canSend) return;
-
     return this.sendToBuildkite(fileResult(results));
   }
   async onRunStart() {
-    if (!this.canSend) return;
-
-    await this.connect().catch(e =>
-      console.log("Not sending to buildkite analytics", e)
-    );
+    await this.socket
+      ?.connect()
+      .catch(e => console.log("Not sending to buildkite analytics", e));
   }
 
   async onRunComplete(_testContexts, results) {
-    this.socket.end(results.numTotalTests);
+    return this.socket?.end(results.numTotalTests);
   }
 }
 
