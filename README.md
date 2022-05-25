@@ -5,7 +5,7 @@ This package collects data about your test suite's performance and reliability, 
 ## Installation
 
 ```shellscript
-yarn add @appbot/jest-buildkite-analytics
+yarn add @appbot.co/jest-buildkite-analytics
 ```
 
 Configure your API key:
@@ -22,7 +22,7 @@ Tell jest to use the reporter. Set `reporters` in your `jest.config.js` (or whic
 
 ```javascript
 {
-  reporters: ["default", "jest-buildkite-analytics"];
+  reporters: ["default", "@appbot.co/jest-buildkite-analytics"];
 }
 ```
 
