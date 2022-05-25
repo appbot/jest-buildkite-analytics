@@ -7,3 +7,13 @@ steps:
     plugins:
       - docker#v3.8.0:
           image: "node:14-alpine"
+          environment:
+            - BUILDKITE_BRANCH
+            - BUILDKITE_BUILD_ID
+            - BUILDKITE_BUILD_ID
+            - BUILDKITE_BUILD_NUMBER
+            - BUILDKITE_BUILD_URL
+            - BUILDKITE_COMMIT
+            - BUILDKITE_JEST_ANALYTICS_TOKEN
+            - BUILDKITE_JOB_ID
+            - BUILDKITE_MESSAGE
